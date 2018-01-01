@@ -1,0 +1,21 @@
+{
+  "setting": {},
+  "date": {
+    "start": null,
+    "gohan": null,
+    "unko": []
+  },
+  "param": {
+    "chara": "chana",
+    "phase": 0,
+    "health": 30,
+    "ability": {
+      "academic": 1,
+      "music": 1,
+      "eros": 1,
+      "gag": 1,
+      "cola": 0,
+      "medicine": 0
+    }
+  }
+}

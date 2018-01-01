@@ -1,17 +1,19 @@
 import Phaser from "phaser";
 import Character from "../chara/character";
+import DataController from "../data/DataController";
 import chara_setting from "../chara/chara_setting.json";
+
 export default class Game extends Phaser.Scene {
   isAnime: boolean;
   charaTween?: Phaser.Tweens.Tween;
   public player?: Character;
-
+  DataController : DataController;
   charaName: string;
   constructor() {
     super("GameScene");
     this.isAnime = false;
-    this.charaName = "chana";
-    // this.player = new Character(this, 32, 100, this.charaName);
+    this.DataController = new DataController;
+    this.charaName = this.DataController.data.param.chara;
   }
 
   preload() {
@@ -29,6 +31,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    window.addEventListener('blur', this.DataController.getDateNow, false);
     const sceneW = this.scale.width;
     const wCenter = sceneW / 2;
     const sceneH = this.scale.height;
@@ -54,9 +57,18 @@ export default class Game extends Phaser.Scene {
       },
       this
     );
+
+    this.time.addEvent({
+      // delay: 600000, // 1分ごとにチェック。
+      delay: 1000, // 1秒ごとにチェック。
+      callback: () => {
+        this.DataController.checkTime();
+      },
+      loop: true,
+    });
   }
 
   update() {
-
+    // this.DataController.checkTime();
   }
 }
