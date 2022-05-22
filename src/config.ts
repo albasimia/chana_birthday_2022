@@ -1,13 +1,40 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export default {
-  type: Phaser.AUTO,
-  parent: 'game',
-  backgroundColor: '#33A5E7',
+  // type: Phaser.AUTO,
+  type: Phaser.CANVAS,
+  // type: Phaser.WEBGL,
+  parent: "game",
+  backgroundColor: "#33A5E7",
   scale: {
-    width: 800,
-    height: 600,
+    width: 96,
+    height: 160,
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  }
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  // physics: {
+  //   default: "matter",
+  //   matter: {
+  //     gravity: {
+  //       x: 0,
+  //       y: 0,
+  //     },
+  //   },
+  // },
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: {
+        x: 0,
+        y: 0,
+      },
+      // debug: true,
+    },
+  },
+  fps: 10,
+  antialias :false,
+  // antialiasGL :false,
+  // render: {
+  //   pixelArt: true,
+  // },
 };
