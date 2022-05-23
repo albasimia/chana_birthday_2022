@@ -14,14 +14,14 @@ export default class Demo extends Phaser.Scene {
   preload() {
     this.load.image("sky", "assets/img/sky.png");
     this.load.image("ground", "assets/img/ground.png");
-    // this.load.spritesheet("tanikou", "docs/assets/img/tanikou_kari.png", {
-    //   frameWidth: 28,
-    //   frameHeight: 32,
-    // });
-    this.load.spritesheet("tanikou", "assets/img/chara_ss.png", {
-      frameWidth: 32,
+    this.load.spritesheet("tanikou", "assets/img/tanikou_kari.png", {
+      frameWidth: 28,
       frameHeight: 32,
     });
+    // this.load.spritesheet("tanikou", "assets/img/chara_ss.png", {
+    //   frameWidth: 32,
+    //   frameHeight: 32,
+    // });
   }
 
   create() {
