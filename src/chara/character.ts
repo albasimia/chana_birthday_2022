@@ -1,68 +1,72 @@
 import Phaser from "phaser";
-class Character extends Phaser.Physics.Arcade.Sprite {
-  speed: number;
-  points: any;
-  target: any;
-  targetIndex: number;
-  isSeeking: boolean;
-  constructor(scene: Phaser.Scene, x: number, y: number, points: any) {
-    super(scene, x, y, "ship", 2);
+import setting from "./chara_setting.json";
+export default class Character extends Phaser.Physics.Arcade.Sprite {
+  charaTween?: Phaser.Tweens.Tween;
+  isAnime: boolean;
+  name: string;
+  anime?: false | Phaser.Animations.Animation;
+  constructor(scene: Phaser.Scene, x: number, y: number, name: string) {
+    super(scene, x, y, name);
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.setScale(2);
-    this.play("thrust");
+    this.isAnime = false;
+    this.name = name;
 
-    this.speed = 150;
-    this.points = points;
+    this.setScale(setting[name].scale);
 
-    this.target;
-    this.targetIndex = -1;
-
-    this.isSeeking = true;
-
-    this.seek();
+    this.setAnime();
+    return this;
   }
+  move(x: number, y: number) {
+    if (this.isAnime && this.charaTween) {
+      this.charaTween.stop();
+    }
+    this.isAnime = true;
+    let isFlip = false;
+    const target = { x: x, y: y };
 
-  seek() {
-    //  Pick a random target point
-    var entry = Phaser.Utils.Array.GetRandom(this.points);
+    if (this.x < target.x) {
+      isFlip = true;
+    }
 
-    this.target = entry;
+    this.flipX = isFlip;
 
-    this.isSeeking = false;
-
-    this.scene.tweens.add({
-      targets: this.body.velocity,
-      x: 0,
-      y: 0,
-      ease: "Linear",
-      duration: 500,
-      onComplete: function (tween, targets, ship) {
-        ship.isSeeking = true;
-        ship.scene.tweens.add({
-          targets: ship,
-          speed: 150,
-          delay: 500,
-          ease: "Sine.easeOut",
-          duration: 1000,
-        });
+    this.charaTween = this.scene.tweens.add({
+      targets: this,
+      props: {
+        x: { value: target.x, duration: Math.abs(target.x - this.x) * 20 },
+        y: { value: target.y, duration: Math.abs(target.y - this.y) * 20 },
       },
-      onCompleteParams: [this],
+      ease: "Sine.easeInOut",
+      callbackScope: this,
+      onComplete: () => {
+        this.anims.stop();
+        this.isAnime = false;
+        this.setFrame(0);
+      },
     });
   }
-
+  changeChara(name: string) {
+    this.name = name;
+    this.setTexture(name);
+    this.setScale(setting[name].scale);
+    this.body.setSize(20, 32); // コライダーのサイズ
+    this.anims.remove("move");
+    this.setAnime(name);
+  }
+  setAnime(chara: string = this.name, start: number = 0, end: number = 3) {
+    this.anime = this.scene.anims.create({
+      key: chara,
+      frames: this.anims.generateFrameNumbers(chara, { start: start, end: end }),
+      frameRate: 10,
+    });
+  }
   preUpdate(time: number, delta: number) {
     super.preUpdate(time, delta);
-
-    //  Is the ship within the radius of the target?
-    if (this.target.contains(this.x, this.y)) {
-      this.seek();
-    } else if (this.isSeeking) {
-      var angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
-
-      this.scene.physics.velocityFromRotation(angle, this.speed, this.body.velocity);
+    if (this.isAnime) {
+      this.anims.play(this.name, true);
     }
   }
 }

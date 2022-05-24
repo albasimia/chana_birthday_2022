@@ -1,0 +1,20 @@
+{
+  "makoto": {
+    "path": "assets/img/makoto_ss.png",
+    "scale": 1,
+    "frameW": 64,
+    "frameH": 64
+  },
+  "taki": {
+    "path": "assets/img/taki_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32
+  },
+  "tanikou": {
+    "path": "assets/img/tanikou_kari.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32
+  }
+}

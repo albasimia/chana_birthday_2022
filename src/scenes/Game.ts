@@ -1,21 +1,34 @@
 import Phaser from "phaser";
+import Character from "../chara/character"
 export default class Demo extends Phaser.Scene {
-  isAnime: boolean = false;
+  isAnime: boolean;
   charaTween?: Phaser.Tweens.Tween;
   // private player?: Phaser.GameObjects.Sprite;
-  player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  // player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  player?: Character;
   // player?: Phaser.Types.Physics.Matter.MatterBody;
 
   // private player?: any
+  charaName: string;
   constructor() {
     super("GameScene");
+    this.isAnime = false;
+    this.charaName = 'taki';
   }
 
   preload() {
     this.load.image("sky", "assets/img/sky.png");
     this.load.image("ground", "assets/img/ground.png");
+    this.load.spritesheet("makoto", "assets/img/makoto_ss.png", {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
     this.load.spritesheet("tanikou", "assets/img/tanikou_kari.png", {
       frameWidth: 28,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("taki", "assets/img/taki_ss.png", {
+      frameWidth: 32,
       frameHeight: 32,
     });
     // this.load.spritesheet("tanikou", "assets/img/chara_ss.png", {
@@ -30,10 +43,16 @@ export default class Demo extends Phaser.Scene {
     const wCenter = sceneW / 2;
     const sceneH = this.scale.height;
     const hCenter = sceneH / 2;
-    this.add.image(wCenter, hCenter, "sky");
-    this.add.image(wCenter, sceneH - 32, "ground");
+    const sky = this.add.image(wCenter, hCenter, "sky");
+    const ground = this.add.image(wCenter, sceneH - 32, "ground");
+    // const makoto = this.add.image(wCenter, sceneH - 32, "makoto");
+    // makoto.scale = .5;
+    sky.scale = 2;
+    ground.scale = 2;
 
-    this.player = this.physics.add.sprite(32, 100, "tanikou");
+    // this.player = this.physics.add.sprite(32, 100, "tanikou");
+    // this.player = this.physics.add.sprite(32, 100, this.charaName);
+    this.player = new Character(this, 32, 100, this.charaName);
     this.player.flipX = true;
     this.player.setCollideWorldBounds(true);
 
@@ -43,51 +62,24 @@ export default class Demo extends Phaser.Scene {
 
     this.input.on(
       "pointerup",
-      function (p: Phaser.Input.Pointer) {
-        // this.player.anims.play("move", true);
-        if(this.isAnime) {
-          this.charaTween.stop();
-        }
-        this.isAnime = true;
-        let isFlip = false;
-        const target = {x: p.upX, y: p.upY}
-        
-        if (this.player.x < target.x) {
-          isFlip = true;
-        }
-
-        this.player.flipX = isFlip;
-
-        this.charaTween = this.tweens.add({
-          targets: this.player,
-          props: {
-            // x: { value: target.x, duration: Math.abs(target.x - this.player.x) * 50 },
-            // y: { value: target.y, duration: Math.abs(target.y - this.player.y) * 50 },
-            x: { value: target.x, duration: Math.abs(target.x - this.player.x) * 50 },
-            y: { value: target.y, duration: Math.abs(target.y - this.player.y) * 50 },
-          },
-          ease: "Sine.easeInOut",
-          callbackScope: this,
-          onComplete: function () {
-            this.player.anims.stop();
-            this.isAnime = false;
-            this.player.setFrame(0);
-          },
-        });
+      (p: Phaser.Input.Pointer) => {
+        this.player?.changeChara(Phaser.Utils.Array.GetRandom(['tanikou', 'taki', 'makoto']));
+        // this.player?.setAnime();
+        this.player?.move(p.upX, p.upY);
       },
       this
     );
 
-    this.anims.create({
-      key: "move",
-      frames: this.anims.generateFrameNumbers("tanikou", { start: 0, end: 4 }),
-      frameRate: 10,
-    });
+    // this.anims.create({
+    //   key: "move",
+    //   frames: this.anims.generateFrameNumbers(this.charaName, { start: 0, end: 4 }),
+    //   frameRate: 10,
+    // });
   }
 
   update() {
-    if (this.isAnime) {
-      this.player?.anims.play("move", true);
-    }
+    // if (this.isAnime) {
+    //   this.player?.anims.play("move", true);
+    // }
   }
 }
