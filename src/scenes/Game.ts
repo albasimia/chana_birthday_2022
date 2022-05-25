@@ -1,40 +1,30 @@
 import Phaser from "phaser";
-import Character from "../chara/character"
+import Character from "../chara/character";
+import chara_setting from "../chara/chara_setting.json";
 export default class Demo extends Phaser.Scene {
   isAnime: boolean;
   charaTween?: Phaser.Tweens.Tween;
-  // private player?: Phaser.GameObjects.Sprite;
-  // player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   player?: Character;
-  // player?: Phaser.Types.Physics.Matter.MatterBody;
 
-  // private player?: any
   charaName: string;
   constructor() {
     super("GameScene");
     this.isAnime = false;
-    this.charaName = 'taki';
+    this.charaName = "taki";
   }
 
   preload() {
     this.load.image("sky", "assets/img/sky.png");
     this.load.image("ground", "assets/img/ground.png");
-    this.load.spritesheet("makoto", "assets/img/makoto_ss.png", {
-      frameWidth: 64,
-      frameHeight: 64,
-    });
-    this.load.spritesheet("tanikou", "assets/img/tanikou_kari.png", {
-      frameWidth: 28,
-      frameHeight: 32,
-    });
-    this.load.spritesheet("taki", "assets/img/taki_ss.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    // this.load.spritesheet("tanikou", "assets/img/chara_ss.png", {
-    //   frameWidth: 32,
-    //   frameHeight: 32,
-    // });
+    for (const name in chara_setting) {
+      if (Object.prototype.hasOwnProperty.call(chara_setting, name)) {
+        const element = chara_setting[name];
+        this.load.spritesheet(name, element.path, {
+          frameWidth: element.frameW,
+          frameHeight: element.frameH,
+        });
+      }
+    }
   }
 
   create() {
@@ -45,13 +35,9 @@ export default class Demo extends Phaser.Scene {
     const hCenter = sceneH / 2;
     const sky = this.add.image(wCenter, hCenter, "sky");
     const ground = this.add.image(wCenter, sceneH - 32, "ground");
-    // const makoto = this.add.image(wCenter, sceneH - 32, "makoto");
-    // makoto.scale = .5;
     sky.scale = 2;
     ground.scale = 2;
 
-    // this.player = this.physics.add.sprite(32, 100, "tanikou");
-    // this.player = this.physics.add.sprite(32, 100, this.charaName);
     this.player = new Character(this, 32, 100, this.charaName);
     this.player.flipX = true;
     this.player.setCollideWorldBounds(true);
@@ -63,23 +49,14 @@ export default class Demo extends Phaser.Scene {
     this.input.on(
       "pointerup",
       (p: Phaser.Input.Pointer) => {
-        this.player?.changeChara(Phaser.Utils.Array.GetRandom(['tanikou', 'taki', 'makoto']));
-        // this.player?.setAnime();
+        this.player?.changeChara(Phaser.Utils.Array.GetRandom(["tanikou", "taki", "makoto", "makiko"]));
         this.player?.move(p.upX, p.upY);
       },
       this
     );
-
-    // this.anims.create({
-    //   key: "move",
-    //   frames: this.anims.generateFrameNumbers(this.charaName, { start: 0, end: 4 }),
-    //   frameRate: 10,
-    // });
   }
 
   update() {
-    // if (this.isAnime) {
-    //   this.player?.anims.play("move", true);
-    // }
+
   }
 }

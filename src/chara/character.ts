@@ -2,28 +2,30 @@ import Phaser from "phaser";
 import setting from "./chara_setting.json";
 export default class Character extends Phaser.Physics.Arcade.Sprite {
   charaTween?: Phaser.Tweens.Tween;
-  isAnime: boolean;
+  isMove: boolean;
   name: string;
-  anime?: false | Phaser.Animations.Animation;
+  move_anime?: false | Phaser.Animations.Animation;
+  idle_anime?: false | Phaser.Animations.Animation;
   constructor(scene: Phaser.Scene, x: number, y: number, name: string) {
     super(scene, x, y, name);
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.isAnime = false;
+    this.isMove = false;
     this.name = name;
 
     this.setScale(setting[name].scale);
 
-    this.setAnime();
+    this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
     return this;
   }
   move(x: number, y: number) {
-    if (this.isAnime && this.charaTween) {
+    if (this.charaTween) {
       this.charaTween.stop();
+      this.charaTween.remove();
     }
-    this.isAnime = true;
+    this.isMove = true;
     let isFlip = false;
     const target = { x: x, y: y };
 
@@ -43,7 +45,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
       callbackScope: this,
       onComplete: () => {
         this.anims.stop();
-        this.isAnime = false;
+        this.isMove = false;
         this.setFrame(0);
       },
     });
@@ -54,19 +56,27 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     this.setScale(setting[name].scale);
     this.body.setSize(20, 32); // コライダーのサイズ
     this.anims.remove("move");
-    this.setAnime(name);
+    this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
   }
   setAnime(chara: string = this.name, start: number = 0, end: number = 3) {
-    this.anime = this.scene.anims.create({
-      key: chara,
+    this.move_anime = this.scene.anims.create({
+      key: chara + "_move",
       frames: this.anims.generateFrameNumbers(chara, { start: start, end: end }),
       frameRate: 10,
+    });
+    this.idle_anime = this.scene.anims.create({
+      key: chara + "_idle",
+      frames: this.anims.generateFrameNumbers(chara, { start: 0, end: 1 }),
+      frameRate: 2,
+      repeat: -1,
     });
   }
   preUpdate(time: number, delta: number) {
     super.preUpdate(time, delta);
-    if (this.isAnime) {
-      this.anims.play(this.name, true);
+    if (this.isMove) {
+      this.anims.play(this.name + "_move", true);
+    } else {
+      this.anims.play(this.name + "_idle", true);
     }
   }
 }

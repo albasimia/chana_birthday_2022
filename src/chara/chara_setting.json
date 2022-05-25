@@ -3,18 +3,32 @@
     "path": "assets/img/makoto_ss.png",
     "scale": 1,
     "frameW": 64,
-    "frameH": 64
+    "frameH": 64,
+    "frameStart": 0,
+    "frameEnd": 3
   },
   "taki": {
     "path": "assets/img/taki_ss.png",
     "scale": 2,
     "frameW": 32,
-    "frameH": 32
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3
   },
   "tanikou": {
     "path": "assets/img/tanikou_kari.png",
     "scale": 2,
+    "frameW": 28,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3
+  },
+  "makiko": {
+    "path": "assets/img/makiko_ss.png",
+    "scale": 2,
     "frameW": 32,
-    "frameH": 32
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 1
   }
 }
