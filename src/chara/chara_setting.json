@@ -5,7 +5,11 @@
     "frameW": 64,
     "frameH": 64,
     "frameStart": 0,
-    "frameEnd": 3
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 40,
+      "h": 60
+    }
   },
   "taki": {
     "path": "assets/img/taki_ss.png",
@@ -13,7 +17,11 @@
     "frameW": 32,
     "frameH": 32,
     "frameStart": 0,
-    "frameEnd": 3
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
   },
   "tanikou": {
     "path": "assets/img/tanikou_kari.png",
@@ -21,7 +29,11 @@
     "frameW": 28,
     "frameH": 32,
     "frameStart": 0,
-    "frameEnd": 3
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
   },
   "makiko": {
     "path": "assets/img/makiko_ss.png",
@@ -29,6 +41,46 @@
     "frameW": 32,
     "frameH": 32,
     "frameStart": 0,
-    "frameEnd": 1
+    "frameEnd": 1,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "ranshia": {
+    "path": "assets/img/ranshia_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 1,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "konataro": {
+    "path": "assets/img/konataro_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 1,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "watari": {
+    "path": "assets/img/watari_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
   }
 }

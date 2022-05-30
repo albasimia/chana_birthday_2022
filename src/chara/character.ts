@@ -15,7 +15,8 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     this.isMove = false;
     this.name = name;
 
-    this.setScale(setting[name].scale);
+    // this.setScale(setting[name].scale);
+    this.changeChara(name);
 
     this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
     return this;
@@ -54,7 +55,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     this.name = name;
     this.setTexture(name);
     this.setScale(setting[name].scale);
-    this.body.setSize(20, 32); // コライダーのサイズ
+    this.body.setSize(setting[name].bodySize.w, setting[name].bodySize.h); // コライダーのサイズ
     this.anims.remove("move");
     this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
   }

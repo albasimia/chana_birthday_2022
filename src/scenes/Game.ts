@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import Character from "../chara/character";
 import chara_setting from "../chara/chara_setting.json";
-export default class Demo extends Phaser.Scene {
+export default class Game extends Phaser.Scene {
   isAnime: boolean;
   charaTween?: Phaser.Tweens.Tween;
   player?: Character;
@@ -39,7 +39,7 @@ export default class Demo extends Phaser.Scene {
     ground.scale = 2;
 
     this.player = new Character(this, 32, 100, this.charaName);
-    this.player.flipX = true;
+    // this.player.flipX = true;
     this.player.setCollideWorldBounds(true);
 
     // this.player.setBounce(0.5);
@@ -49,7 +49,7 @@ export default class Demo extends Phaser.Scene {
     this.input.on(
       "pointerup",
       (p: Phaser.Input.Pointer) => {
-        this.player?.changeChara(Phaser.Utils.Array.GetRandom(["tanikou", "taki", "makoto", "makiko"]));
+        this.player?.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
         this.player?.move(p.upX, p.upY);
       },
       this
