@@ -3,6 +3,7 @@ import config from "./config";
 import GameScene from "./scenes/Game";
 import UIScene from "./scenes/Ui";
 
+
 // const canvas = document.createElement("canvas");
 // canvas.id = "canvas";
 // document.body.appendChild(canvas);

@@ -2,8 +2,8 @@ import Phaser from "phaser";
 
 export default {
   // type: Phaser.AUTO,
-  type: Phaser.CANVAS,
-  // type: Phaser.WEBGL,
+  // type: Phaser.CANVAS,
+  type: Phaser.WEBGL,
   parent: "game",
   backgroundColor: "#33A5E7",
   scale: {
@@ -39,7 +39,7 @@ export default {
   // render: {
   //   pixelArt: true,
   // },
-  dom: {
-    createContainer: true,
-  },
+  // dom: {
+  //   createContainer: true,
+  // },
 };

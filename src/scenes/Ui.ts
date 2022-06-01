@@ -10,17 +10,35 @@ export default class Ui extends Phaser.Scene {
     Phaser.Scene.call(this, { key: "UIScene", active: true });
   }
   preload() {
-    this.load.spritesheet("btn", "assets/img/btn.png", {
+    this.load.spritesheet("btn", "assets/img/btn_gray2.png", {
+      frameWidth: 30,
+      frameHeight: 18,
+    });
+    this.load.spritesheet("btn_frame", "assets/img/btn_gray_frame.png", {
       frameWidth: 30,
       frameHeight: 18,
     });
   }
   create() {
-    new Button(this, 40, 250, "ごはん", {
-      width: 30,
-      height: 18,
+    new Button(this, 32, 300, {
+      color: 0xff0000,
+      text: "ごはん",
       onClick: () => {
-        console.log("Click!!");
+        console.log(1);
+      },
+    });
+    new Button(this, 96, 300, {
+      color: 0xffff00,
+      text: "うんどう",
+      onClick: () => {
+        console.log(2);
+      },
+    });
+    new Button(this, 160, 300, {
+      color: 0x0099ff,
+      text: "トイレ",
+      onClick: () => {
+        console.log(3);
       },
     });
 

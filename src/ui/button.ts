@@ -1,14 +1,17 @@
-import Phaser from "phaser";
+import Phaser, { GameObjects } from "phaser";
 
 interface Props {
   width?: number;
   height?: number;
+  color?: number;
+  text?: string;
   onClick?: Function;
 }
 export default class Button extends Phaser.GameObjects.Container {
   seKey: string = "";
   text: Phaser.GameObjects.Text;
   sprite: Phaser.GameObjects.Sprite;
+  frame: Phaser.GameObjects.Sprite;
   fill: number = 0x000000;
   stroke: number = 0xffffff;
 
@@ -16,43 +19,39 @@ export default class Button extends Phaser.GameObjects.Container {
     scene: Phaser.Scene,
     x: number,
     y: number,
-    text: string,
-    props: Props,
-    { align = "center", fontSize = 15, color = "red" } = {}
+    props: Props
   ) {
     super(scene, x, y);
 
-    const { width = 30, height = 18, onClick } = props;
-
+    const { color, text = "", onClick } = props;
     this.scene = scene;
     this.scene.add.existing(this);
 
-    // const alignLeft = align === "left";
-    // this.text = scene.add
-    //   .text(alignLeft ? -width / 2 + 0 : 0, -1, text, { align, fontSize, color })
-    //   .setOrigin(alignLeft ? 0 : 0.5, 0.5)
-    //   .setPadding(0, 2, 0, 0);
-
     this.sprite = scene.add.sprite(0, 0, "btn", 1);
-    // this.sprite.displayOriginX = 0;
-    // this.sprite.displayOriginY = 0;
 
-    this.setSize(width, height).setInteractive();
-    this.setScale(2);
+    this.setSize(60, 36).setInteractive();
+    this.sprite.setTint(color);
+    this.sprite.setScale(2);
 
-    // this.add([this.container, this.text]);
-    this.add([this.sprite]);
+    this.frame = scene.add.sprite(0, 0, "btn_frame", 1);
+    this.frame.setScale(2);
+    this.text = scene.add.text(0, 0, text, {
+      fontSize: "12px",
+      align: "center",
+      color: "#ffffff",
+      // color: "#000000",
+      fontFamily: "misaki",
+    });
+    this.text.setAlpha(.9);
+    this.text.setOrigin(0.5, 0.9);
+
+    this.add([this.sprite, this.frame, this.text]);
 
     this.setAnime();
-    // this.on("pointerover", () => {
-    //   this.setAlpha(0.7);
-    // });
-    // this.on("pointerout", () => {
-    //   this.setAlpha(1);
-    // });
     this.on("pointerup", (p: Phaser.Input.Pointer) => {
       onClick && onClick(p);
       this.sprite.anims.play("btn", true);
+      this.frame.anims.play("btn_frame", true);
     });
   }
 
@@ -68,6 +67,11 @@ export default class Button extends Phaser.GameObjects.Container {
     this.scene.anims.create({
       key: "btn",
       frames: this.sprite.anims.generateFrameNumbers("btn", { frames: [1, 0, 1] }),
+      frameRate: 15,
+    });
+    this.scene.anims.create({
+      key: "btn_frame",
+      frames: this.frame.anims.generateFrameNumbers("btn_frame", { frames: [1, 0, 1] }),
       frameRate: 15,
     });
   }

@@ -28,7 +28,6 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    let angle = 0;
     const sceneW = this.scale.width;
     const wCenter = sceneW / 2;
     const sceneH = this.scale.height;
