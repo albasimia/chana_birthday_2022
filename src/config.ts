@@ -36,9 +36,9 @@ export default {
   fps: 10,
   antialias: false,
   // antialiasGL :false,
-  // render: {
-  //   pixelArt: true,
-  // },
+  render: {
+    pixelArt: true,
+  },
   // dom: {
   //   createContainer: true,
   // },

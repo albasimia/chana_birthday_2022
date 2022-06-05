@@ -1,4 +1,40 @@
 {
+  "chana": {
+    "path": "assets/img/chana_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "masara": {
+    "path": "assets/img/masara_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "makiko": {
+    "path": "assets/img/makiko_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 1,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
   "makoto": {
     "path": "assets/img/makoto_ss.png",
     "scale": 1,
@@ -9,6 +45,18 @@
     "bodySize": {
       "w": 40,
       "h": 60
+    }
+  },
+  "rancia": {
+    "path": "assets/img/rancia_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 1,
+    "bodySize": {
+      "w": 20,
+      "h": 30
     }
   },
   "taki": {
@@ -35,30 +83,6 @@
       "h": 30
     }
   },
-  "makiko": {
-    "path": "assets/img/makiko_ss.png",
-    "scale": 2,
-    "frameW": 32,
-    "frameH": 32,
-    "frameStart": 0,
-    "frameEnd": 1,
-    "bodySize": {
-      "w": 20,
-      "h": 30
-    }
-  },
-  "ranshia": {
-    "path": "assets/img/ranshia_ss.png",
-    "scale": 2,
-    "frameW": 32,
-    "frameH": 32,
-    "frameStart": 0,
-    "frameEnd": 1,
-    "bodySize": {
-      "w": 20,
-      "h": 30
-    }
-  },
   "konataro": {
     "path": "assets/img/konataro_ss.png",
     "scale": 2,
@@ -73,6 +97,54 @@
   },
   "watari": {
     "path": "assets/img/watari_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "chachamaru": {
+    "path": "assets/img/chachamaru_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "dairi": {
+    "path": "assets/img/dairi_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "erishia": {
+    "path": "assets/img/erishia_ss.png",
+    "scale": 2,
+    "frameW": 32,
+    "frameH": 32,
+    "frameStart": 0,
+    "frameEnd": 3,
+    "bodySize": {
+      "w": 20,
+      "h": 30
+    }
+  },
+  "taguchi": {
+    "path": "assets/img/taguchi_ss.png",
     "scale": 2,
     "frameW": 32,
     "frameH": 32,

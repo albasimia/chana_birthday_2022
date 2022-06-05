@@ -1,12 +1,15 @@
 import Phaser from "phaser";
 import Button from "../ui/button";
+import Game from "../scenes/Game";
+import chara_setting from "../chara/chara_setting.json";
+
 export default class Ui extends Phaser.Scene {
-  score: number;
   // button?: Button;
   // sprite:
+  // game: Phaser.Scene;
+  game: Game;
   constructor() {
     super("UIScene");
-    this.score = 0;
     Phaser.Scene.call(this, { key: "UIScene", active: true });
   }
   preload() {
@@ -20,25 +23,42 @@ export default class Ui extends Phaser.Scene {
     });
   }
   create() {
-    new Button(this, 32, 300, {
+    this.game = this.scene.get("GameScene");
+
+    const button1 = new Button(this, 32, 300, {
+      // color: 0x999999,
       color: 0xff0000,
       text: "ごはん",
       onClick: () => {
-        console.log(1);
+        console.log("gohan");
       },
     });
-    new Button(this, 96, 300, {
+    const button2 = new Button(this, 96, 300, {
       color: 0xffff00,
       text: "うんどう",
       onClick: () => {
-        console.log(2);
+        console.log("undou");
       },
     });
-    new Button(this, 160, 300, {
+    const button3 = new Button(this, 160, 300, {
       color: 0x0099ff,
       text: "トイレ",
       onClick: () => {
-        console.log(3);
+        console.log("toire");
+      },
+    });
+    const button4 = new Button(this, 32, 20, {
+      text: "しんか",
+      onClick: () => {
+        console.log("shinka");
+        this.game.player?.evolution("taki");
+      },
+    });
+    const button5 = new Button(this, 160, 20, {
+      text: "リセット",
+      onClick: () => {
+        console.log("reset");
+        this.game.player?.changeChara("chana");
       },
     });
 

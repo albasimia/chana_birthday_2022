@@ -4,13 +4,14 @@ import chara_setting from "../chara/chara_setting.json";
 export default class Game extends Phaser.Scene {
   isAnime: boolean;
   charaTween?: Phaser.Tweens.Tween;
-  player?: Character;
+  public player?: Character;
 
   charaName: string;
   constructor() {
     super("GameScene");
     this.isAnime = false;
-    this.charaName = "taki";
+    this.charaName = "chana";
+    // this.player = new Character(this, 32, 100, this.charaName);
   }
 
   preload() {
@@ -45,10 +46,10 @@ export default class Game extends Phaser.Scene {
     // this.player.setVelocityY(Phaser.Math.Between(-20, 20));
     // this.player.setVelocityX(Phaser.Math.Between(-20, 20));
 
-    this.input.on(
+    sky.setInteractive();
+    sky.on(
       "pointerup",
       (p: Phaser.Input.Pointer) => {
-        this.player?.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
         this.player?.move(p.upX, p.upY);
       },
       this
