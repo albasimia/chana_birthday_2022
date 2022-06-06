@@ -51,7 +51,13 @@ export default class Ui extends Phaser.Scene {
       text: "しんか",
       onClick: () => {
         console.log("shinka");
-        this.game.player?.evolution("taki");
+        if (this.game.player?.name == "chana") {
+          this.game.player?.evolution("masara");
+        } else if (this.game.player?.name == "masara") {
+          this.game.player?.evolution(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
+        } else {
+          this.game.player?.evolution(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
+        }
       },
     });
     const button5 = new Button(this, 160, 20, {

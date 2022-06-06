@@ -124,7 +124,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
             onComplete: () => {
               const correntChara = this.name;
               let nextNum = 10000;
-              let numToDivide = 1.12;
+              let numToDivide = 1.1;
               this.scene.tweens.addCounter({
                 from: 10000,
                 to: 0,
@@ -141,14 +141,14 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
                   }
                 },
                 onComplete: () => {
-                  if (this.name == "chana") {
-                    this.changeChara("masara");
-                  } else if (this.name == "masara") {
-                    this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-                  } else {
-                    // this.changeChara(evolCharaName);
-                    this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
-                  }
+                  // if (this.name == "chana") {
+                  //   this.changeChara("masara");
+                  // } else if (this.name == "masara") {
+                  //   this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
+                  // } else {
+                  //   this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
+                  // }
+                  this.changeChara(evolCharaName);
                   this.clearTint();
                 },
               });
