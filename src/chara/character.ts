@@ -1,13 +1,14 @@
 import Phaser from "phaser";
 import setting from "./chara_setting.json";
-import CustomPipeline from "../shader/CustomPipeline";
+// import CustomPipeline from "../shader/CustomPipeline";
 export default class Character extends Phaser.Physics.Arcade.Sprite {
   charaTween?: Phaser.Tweens.Tween;
   isMove: boolean;
   name: string;
   move_anime?: false | Phaser.Animations.Animation;
   idle_anime?: false | Phaser.Animations.Animation;
-  private customPipeline!: Phaser.Renderer.WebGL.WebGLPipeline;
+  // private customPipeline!: Phaser.Renderer.WebGL.WebGLPipeline;
+  // private time = 0;
   constructor(scene: Phaser.Scene, x: number, y: number, name: string) {
     super(scene, x, y, name);
 
@@ -27,8 +28,13 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
       console.log(this.name);
     });
 
-    const renderer = this.scene.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer;
-    // this.customPipeline = renderer.addPipeline("Custom", new CustomPipeline(this.scene.game));
+    // const renderer = this.scene.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer;
+    // this.customPipeline = renderer.pipelines.add("Custom", new CustomPipeline(this.scene.game));
+    // this.customPipeline.set2f(
+    //   "uResolution",
+    //   setting[this.name].bodySize.w,
+    //   setting[this.name].bodySize.h
+    // );
     return this;
   }
   move(x: number, y: number, callBack?: any) {
@@ -69,48 +75,88 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     this.setTexture(name);
     this.setScale(setting[name].scale);
     this.body.setSize(setting[name].bodySize.w, setting[name].bodySize.h); // コライダーのサイズ
-    this.anims.remove("move");
+    // this.anims.remove("move");
     this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
   }
-  evolution(name: string) {
+  evolution(evolCharaName: string) {
+    this.anims.pause();
     this.move(96, 160, async () => {
-      // await this.setTintFill(0xffffff);
       this.scene.tweens.addCounter({
         from: 255,
         to: 0,
-        duration: 1000,
+        duration: 2000,
         onUpdate: (tween) => {
           const value = Math.floor(tween.getValue());
           this.setTint(Phaser.Display.Color.GetColor(value, value, value));
         },
         onComplete: () => {
+          // shader
           // this.setPipeline("Custom");
+          // this.scene.tweens.addCounter({
+          //   from: 0,
+          //   to: 3000,
+          //   duration: 1000,
+          //   onUpdate: (tween) => {
+          //     this.customPipeline.set1f("uTime", tween.getValue());
+          //   },
+          //   onComplete: () => {
+          //     if (this.name == "chana") {
+          //       this.changeChara("masara");
+          //     } else if (this.name == "masara") {
+          //       this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
+          //     } else {
+          //       this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
+          //     }
+          //     this.resetPipeline();
+          //     this.clearTint();
+          //   },
+          // });
+
+          // img change
           this.scene.tweens.addCounter({
             from: 0,
             to: 255,
-            duration: 1000,
+            duration: 3000,
             onUpdate: (tween) => {
               const value = Math.floor(tween.getValue());
-              this.setTintFill(Phaser.Display.Color.GetColor(value, value, value));
+              this.setTintFill(Phaser.Display.Color.GetColor(value, value, value /1.2));
             },
             onComplete: () => {
-              if (this.name == "chana") {
-                this.changeChara("masara");
-              } else if (this.name == "masara") {
-                this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-              } else {
-                // this.changeChara("makoto");
-                this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
-              }
-              this.clearTint();
+              const correntChara = this.name;
+              let nextNum = 10000;
+              let numToDivide = 1.12;
+              this.scene.tweens.addCounter({
+                from: 10000,
+                to: 0,
+                duration: 10000,
+                onUpdate: (tween) => {
+                  if (tween.getValue() <= nextNum) {
+                    if (this.name == correntChara) {
+                      this.changeChara(evolCharaName);
+                    } else {
+                      this.changeChara(correntChara);
+                    }
+                    nextNum = nextNum / numToDivide;
+                    // numToDivide -= 0.01
+                  }
+                },
+                onComplete: () => {
+                  if (this.name == "chana") {
+                    this.changeChara("masara");
+                  } else if (this.name == "masara") {
+                    this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
+                  } else {
+                    // this.changeChara(evolCharaName);
+                    this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
+                  }
+                  this.clearTint();
+                },
+              });
             },
           });
         },
       });
-
-      // this.clearTint();
     });
-    // this.changeChara(name);
   }
   setAnime(chara: string = this.name, start: number = 0, end: number = 3) {
     this.move_anime = this.scene.anims.create({

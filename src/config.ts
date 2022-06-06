@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import CustomPipeline from "./shader/CustomPipeline";
 
 export default {
   // type: Phaser.AUTO,
@@ -39,6 +40,7 @@ export default {
   render: {
     pixelArt: true,
   },
+  pipeline: { 'CustomPipeline': CustomPipeline }
   // dom: {
   //   createContainer: true,
   // },
