@@ -12,8 +12,9 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
   constructor(scene: Phaser.Scene, x: number, y: number, name: string) {
     super(scene, x, y, name);
 
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
+    this.scene = scene;
+    this.scene.add.existing(this);
+    this.scene.physics.add.existing(this);
 
     this.isMove = false;
     this.name = name;
@@ -80,7 +81,8 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
   }
   evolution(evolCharaName: string) {
     this.anims.pause();
-    this.move(96, 160, async () => {
+    // this.move(96, 160, async () => {
+    this.move(this.scene.wCenter, this.scene.sceneH - 70, async () => {
       this.scene.tweens.addCounter({
         from: 255,
         to: 0,

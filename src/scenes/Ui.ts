@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Button from "../ui/button";
+import FoodsMenu from "../ui/foods_menu";
 import Game from "../scenes/Game";
 import chara_setting from "../chara/chara_setting.json";
 
@@ -7,6 +8,7 @@ export default class Ui extends Phaser.Scene {
   // button?: Button;
   // sprite:
   // game: Phaser.Scene;
+  // menu = Phaser.GameObjects.Container;
   game: Game;
   constructor() {
     super("UIScene");
@@ -30,7 +32,9 @@ export default class Ui extends Phaser.Scene {
       color: 0xff0000,
       text: "ごはん",
       onClick: () => {
-        console.log("gohan");
+        // console.log("gohan");
+        // this.foods_menu.getVisible();
+        this.foods_menu.setVisible(!this.foods_menu.visible);
       },
     });
     const button2 = new Button(this, 96, 300, {
@@ -67,6 +71,9 @@ export default class Ui extends Phaser.Scene {
         this.game.player?.changeChara("chana");
       },
     });
+
+    // this.menu = new Menu(this, 0, 0 , foods_data);
+    this.foods_menu = new FoodsMenu(this, 0, 0, 2);
 
     //  Our Text object to display the Score
     // var info = this.add.text(10, 10, "Score: 0", { font: "24px Arial", fill: "#000000" });
