@@ -21,10 +21,12 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 
     // this.setScale(setting[name].scale);
     this.changeChara(name);
+    // this.body.onOverlap = true;
+    this.body.onCollide = true;
 
     this.setAnime(name, setting[name].frameStart, setting[name].frameEnd);
     this.setInteractive();
-    this.setOrigin(0.5, 0.9);
+    this.setOrigin(0.5, 0.5);
     this.on("pointerup", (p: Phaser.Input.Pointer) => {
       console.log(this.name);
     });

@@ -15,7 +15,7 @@ export default class Menu extends Phaser.GameObjects.Container {
         this.buttons = [];
 
         this.itemsPerRow = itemsPerRow;
-        this.initMenu();
+        // this.initMenu();
     }
     initMenu() {
         for (let i = 0; i < this.items.length; i++) {

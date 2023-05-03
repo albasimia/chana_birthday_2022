@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import Button from "../ui/button";
-import FoodsMenu from "../ui/foods_menu";
+import Button from "../ui/Button";
+import FoodsMenu from "../ui/FoodsMenu";
 import Game from "../scenes/Game";
 import chara_setting from "../chara/chara_setting.json";
 
@@ -73,7 +73,7 @@ export default class Ui extends Phaser.Scene {
     });
 
     // this.menu = new Menu(this, 0, 0 , foods_data);
-    this.foods_menu = new FoodsMenu(this, 0, 0, 2);
+    this.foods_menu = new FoodsMenu(this, this.game, 0, 0, 2);
 
     //  Our Text object to display the Score
     // var info = this.add.text(10, 10, "Score: 0", { font: "24px Arial", fill: "#000000" });
