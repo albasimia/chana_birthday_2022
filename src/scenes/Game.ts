@@ -1,6 +1,6 @@
 import Phaser, { Time } from "phaser";
 import Character from "../chara/Character";
-import chara_setting from "../chara/chara_setting.json";
+import chara_setting from "../settings/chara_setting";
 import foods_setting from "../settings/foods_setting";
 import save_data_template from "../settings/save_data_template";
 import AwayTime from "phaser3-rex-plugins/plugins/awaytime.js";

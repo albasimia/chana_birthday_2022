@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import chara_setting from "./chara_setting.json";
+import chara_setting from "../settings/chara_setting";
 // import CustomPipeline from "../shader/CustomPipeline";
 export default class Character extends Phaser.Physics.Arcade.Sprite {
     charaTween?: Phaser.Tweens.Tween;

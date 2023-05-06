@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Button from "../ui/Button";
 import FoodsMenu from "../ui/FoodsMenu";
 import Game from "../scenes/Game";
-import chara_setting from "../chara/chara_setting.json";
+import chara_setting from "../settings/chara_setting";
 
 export default class Ui extends Phaser.Scene {
   // button?: Button;
