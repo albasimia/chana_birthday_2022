@@ -51,26 +51,26 @@ export default class Ui extends Phaser.Scene {
         console.log("toire");
       },
     });
-    const button4 = new Button(this, 32, 20, {
-      text: "しんか",
-      onClick: () => {
-        console.log("shinka");
-        if (this.game.player?.name == "chana") {
-          this.game.player?.evolution("masara");
-        } else if (this.game.player?.name == "masara") {
-          this.game.player?.evolution(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-        } else {
-          this.game.player?.evolution(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
-        }
-      },
-    });
-    const button5 = new Button(this, 160, 20, {
-      text: "リセット",
-      onClick: () => {
-        console.log("reset");
-        this.game.player?.changeChara("chana");
-      },
-    });
+    // const button4 = new Button(this, 32, 20, {
+    //   text: "しんか",
+    //   onClick: () => {
+    //     console.log("shinka");
+    //     if (this.game.player?.name == "chana") {
+    //       this.game.player?.evolution("masara");
+    //     } else if (this.game.player?.name == "masara") {
+    //       this.game.player?.evolution(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
+    //     } else {
+    //       this.game.player?.evolution(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
+    //     }
+    //   },
+    // });
+    // const button5 = new Button(this, 160, 20, {
+    //   text: "リセット",
+    //   onClick: () => {
+    //     console.log("reset");
+    //     this.game.player?.changeChara("chana");
+    //   },
+    // });
 
     // this.menu = new Menu(this, 0, 0 , foods_data);
     this.foods_menu = new FoodsMenu(this, this.game, 0, 0, 2);

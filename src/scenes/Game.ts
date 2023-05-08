@@ -5,6 +5,7 @@ import foods_setting from "../settings/foods_setting";
 import save_data_template from "../settings/save_data_template";
 import AwayTime from "phaser3-rex-plugins/plugins/awaytime.js";
 import TimeManage from "../tools/TimeManage";
+import EvolutionManage from "../tools/EvolutionManage";
 
 export default class Game extends Phaser.Scene {
     isAnime: boolean;
@@ -21,6 +22,7 @@ export default class Game extends Phaser.Scene {
     save_data: Object;
 
     tm: TimeManage;
+    em: EvolutionManage;
     constructor() {
         super("GameScene");
         // this.player = new Character(this, 32, 100, this.charaName);
@@ -40,6 +42,7 @@ export default class Game extends Phaser.Scene {
         this.charaName = this.save_data.data.player.chara;
 
         this.tm = new TimeManage(this);
+        this.em = new EvolutionManage(this);
     }
 
     preload() {
@@ -134,31 +137,9 @@ export default class Game extends Phaser.Scene {
     }
     tic = () => {
         const time_diff = this.tm.getTimeDiff(this.save_data.data.time.start, Date.now());
-        console.log(time_diff);
-        if(this.save_data.data.player.stage == 0) {
-            if(time_diff >= 0) {
-                this.player?.evolution('chana');
-            }
+        const evolCharaName = this.em.check(time_diff);
+        if(evolCharaName) {
+            this.player?.evolution(evolCharaName);
         }
-        if(this.save_data.data.player.stage == 1) {
-            if(time_diff >= 1) {
-                this.player?.evolution('masara');
-            }
-        }
-        if(this.save_data.data.player.stage == 2) {
-            if(time_diff >= 2) {
-                this.player?.evolution(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-            }
-        }
-        if(this.save_data.data.player.stage == 3) {
-            if(time_diff >= 3) {
-                this.player?.evolution(Phaser.Utils.Array.GetRandom(Object.keys(chara_setting)));
-            }
-        }
-        // if(this.save_data.data.player.stage == 4) {
-        //     if(time_diff >= 4) {
-        //         this.player?.changeChara('haka');
-        //     }
-        // }
     };
 }
