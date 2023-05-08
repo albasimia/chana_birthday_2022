@@ -1,5 +1,6 @@
 import Phaser, { GameObjects, Math } from "phaser";
 import foods_setting from "../settings/foods_setting";
+import parameter_setting from "../settings/parameter_setting";
 
 export default class Food extends Phaser.GameObjects.Container {
     sprite: Phaser.GameObjects.Sprite;
@@ -24,7 +25,6 @@ export default class Food extends Phaser.GameObjects.Container {
         const target_y = rdg.between(150, 250);
         this.setX(target_x);
         this.fall(target_x, target_y);
-
     }
     fall(x: number, y: number, callBack?: any) {
         const target = { x: x, y: y };
@@ -41,8 +41,22 @@ export default class Food extends Phaser.GameObjects.Container {
             },
         });
     }
-    onColide = ()=> {
-        console.log(this.food_data);
+    onColide = () => {
+        // console.log(this.food_data);
+
+        this.food_data.effect.forEach((effect) => {
+            const pram_val = eval(this.scene.save_data.data.player.parameter[effect.target] + effect.operation + effect.value)
+            if(effect.operation == "+") {
+                if(parameter_setting[effect.target].max >= pram_val) {
+                    this.scene.save_data.data.player.parameter[effect.target] = pram_val;
+                }
+            }
+            if(effect.operation == "-") {
+                if(parameter_setting[effect.target].min <= pram_val) {
+                    this.scene.save_data.data.player.parameter[effect.target] = pram_val;
+                }
+            }
+        });
         this.destroy();
-    }
+    };
 }

@@ -34,6 +34,20 @@ const parameter_setting = {
         text: "ギャグ",
         description :"",
     },
+    cola: {
+        initial: 0,
+        max: 999,
+        min: 0,
+        text: "コーラ",
+        description :"",
+    },
+    kusuri: {
+        initial: 0,
+        max: 999,
+        min: 0,
+        text: "くすり",
+        description :"",
+    },
 };
 
 export default parameter_setting;

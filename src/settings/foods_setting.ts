@@ -4,7 +4,10 @@ const foods_setting = [{
         images: [{
             image_name: "ringo",
             path: "assets/img/foods/ringo.png"
-        }]
+        }],
+        effect : [
+            {target: 'health', operation: '+', value: 1},
+        ]
     },
     {
         text: "おんな",
@@ -12,7 +15,12 @@ const foods_setting = [{
         images: [{
             image_name: "girl",
             path: "assets/img/foods/girl.png"
-        }]
+        }],
+        effect : [
+            {target: 'eros', operation: '+', value: 2},
+            {target: 'intelligence', operation: '-', value: 1},
+            {target: 'music', operation: '-', value: 1},
+        ]
     },
     {
         text: "きょうかしょ",
@@ -20,7 +28,12 @@ const foods_setting = [{
         images: [{
             image_name: "kyoukasyo",
             path: "assets/img/foods/kyoukasyo.png"
-        }]
+        }],
+        effect : [
+            {target: 'intelligence', operation: '+', value: 2},
+            {target: 'eros', operation: '-', value: 1},
+            {target: 'gag', operation: '-', value: 1},
+        ]
     },
     {
         text: "コーラ",
@@ -28,7 +41,11 @@ const foods_setting = [{
         images: [{
             image_name: "apple",
             path: "assets/img/foods/cola.png"
-        }]
+        }],
+        effect : [
+            {target: 'health', operation: '-', value: 2},
+            {target: 'cola', operation: '+', value: 1},
+        ]
     },
     {
         text: "ＣＤ",
@@ -57,6 +74,11 @@ const foods_setting = [{
                 image_name: "cd_5",
                 path: "assets/img/foods/cd_5.png"
             },
+        ],
+        effect : [
+            {target: 'music', operation: '+', value: 2},
+            {target: 'gag', operation: '-', value: 1},
+            {target: 'health', operation: '-', value: 1},
         ]
     },
     {
@@ -65,7 +87,12 @@ const foods_setting = [{
         images: [{
             image_name: "tv",
             path: "assets/img/foods/tv.png"
-        }]
+        }],
+        effect : [
+            {target: 'gag', operation: '+', value: 2},
+            {target: 'intelligence', operation: '-', value: 1},
+            {target: 'eros', operation: '-', value: 1},
+        ]
     },
     {
         text: "くすり",
@@ -73,7 +100,11 @@ const foods_setting = [{
         images: [{
             image_name: "kusuri",
             path: "assets/img/foods/kusuri.png"
-        }]
+        }],
+        effect : [
+            {target: 'health', operation: '+', value: 10},
+            {target: 'kusuri', operation: '+', value: 1},
+        ]
     },
 ]
 

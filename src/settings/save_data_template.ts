@@ -11,6 +11,8 @@ const save_data_template = {
                 music: 0,
                 eros: 0,
                 gag: 0,
+                cola: 0,
+                kusuri: 0,
             },
         },
         time: {
