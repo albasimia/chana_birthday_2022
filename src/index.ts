@@ -15,8 +15,10 @@ import UIScene from "./scenes/Ui";
 
 // config.canvas = canvas;
 // config.context = context;
+const game:GameScene = new GameScene();
+const ui:UIScene = new UIScene(game);
 new Phaser.Game(
   Object.assign(config, {
-    scene: [GameScene, UIScene],
+    scene: [game, ui],
   })
 );

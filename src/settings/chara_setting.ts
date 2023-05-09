@@ -10,6 +10,7 @@ const chara_setting = {
             w: 20,
             h: 20,
         },
+        move:false,
     },
     chana: {
         path: "assets/img/chara/chana_ss.png",
@@ -22,6 +23,7 @@ const chara_setting = {
             w: 20,
             h: 20,
         },
+        move:true,
     },
     masara: {
         path: "assets/img/chara/masara_ss.png",
@@ -34,6 +36,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     makiko: {
         path: "assets/img/chara/makiko_ss.png",
@@ -46,6 +49,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     makoto: {
         path: "assets/img/chara/makoto_ss.png",
@@ -58,6 +62,7 @@ const chara_setting = {
             w: 40,
             h: 60,
         },
+        move:true,
     },
     rancia: {
         path: "assets/img/chara/rancia_ss.png",
@@ -70,6 +75,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     taki: {
         path: "assets/img/chara/taki_ss.png",
@@ -82,6 +88,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     tanikou: {
         path: "assets/img/chara/tanikou_kari.png",
@@ -94,6 +101,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     konataro: {
         path: "assets/img/chara/konataro_ss.png",
@@ -106,6 +114,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     watari: {
         path: "assets/img/chara/watari_ss.png",
@@ -118,6 +127,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     chachamaru: {
         path: "assets/img/chara/chachamaru_ss.png",
@@ -130,6 +140,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     dairi: {
         path: "assets/img/chara/dairi_ss.png",
@@ -142,6 +153,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     erishia: {
         path: "assets/img/chara/erishia_ss.png",
@@ -154,6 +166,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     taguchi: {
         path: "assets/img/chara/taguchi_ss.png",
@@ -166,6 +179,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:true,
     },
     haka: {
         path: "assets/img/chara/haka.png",
@@ -178,6 +192,7 @@ const chara_setting = {
             w: 20,
             h: 30,
         },
+        move:false,
     },
 };
 

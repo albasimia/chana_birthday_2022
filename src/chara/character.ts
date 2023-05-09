@@ -43,6 +43,12 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
         return this;
     }
     move(x: number, y: number, callBack?: any) {
+        if (!chara_setting[this.name].move) {
+            if (callBack) {
+                callBack();
+            }
+            return;
+        }
         if (this.charaTween) {
             this.charaTween.stop();
             this.charaTween.remove();
@@ -101,28 +107,12 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
                         this.setTint(Phaser.Display.Color.GetColor(value, value, value));
                     },
                     onComplete: () => {
-                        // shader
-                        // this.setPipeline("Custom");
-                        // this.scene.tweens.addCounter({
-                        //   from: 0,
-                        //   to: 3000,
-                        //   duration: 1000,
-                        //   onUpdate: (tween) => {
-                        //     this.customPipeline.set1f("uTime", tween.getValue());
-                        //   },
-                        //   onComplete: () => {
-                        //     if (this.name == "chana") {
-                        //       this.changeChara("masara");
-                        //     } else if (this.name == "masara") {
-                        //       this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-                        //     } else {
-                        //       this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
-                        //     }
-                        //     this.resetPipeline();
-                        //     this.clearTint();
-                        //   },
-                        // });
-
+                        if (evolCharaName == "haka") {
+                            this.changeChara(evolCharaName);
+                            this.clearTint();
+                            this.isEvolution = false;
+                            return;
+                        }
                         // img change
                         this.scene.tweens.addCounter({
                             from: 0,
@@ -152,13 +142,6 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
                                         }
                                     },
                                     onComplete: () => {
-                                        // if (this.name == "chana") {
-                                        //   this.changeChara("masara");
-                                        // } else if (this.name == "masara") {
-                                        //   this.changeChara(Phaser.Utils.Array.GetRandom(["makiko", "rancia"]));
-                                        // } else {
-                                        //   this.changeChara(Phaser.Utils.Array.GetRandom(Object.keys(setting)));
-                                        // }
                                         this.changeChara(evolCharaName);
                                         this.clearTint();
                                         this.isEvolution = false;

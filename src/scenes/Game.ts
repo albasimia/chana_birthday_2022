@@ -138,7 +138,8 @@ export default class Game extends Phaser.Scene {
     tic = () => {
         const time_diff = this.tm.getTimeDiff(this.save_data.data.time.start, Date.now());
         const evolCharaName = this.em.check(time_diff);
-        if(evolCharaName) {
+        if(evolCharaName != '') {
+            console.log(evolCharaName)
             this.player?.evolution(evolCharaName);
         }
     };
