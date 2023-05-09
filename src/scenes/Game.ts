@@ -46,11 +46,11 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("sky", "assets/img/sky.png");
+        // this.load.image("sky", "assets/img/sky.png");
         this.load.image("kusamura", "assets/img/bg/kusamura.png");
         this.load.image("machi", "assets/img/bg/machi.png");
         this.load.image("umi", "assets/img/bg/umi.png");
-        this.load.image("ground", "assets/img/ground.png");
+        // this.load.image("ground", "assets/img/ground.png");
         for (const name in chara_setting) {
             if (Object.prototype.hasOwnProperty.call(chara_setting, name)) {
                 const element = chara_setting[name];
@@ -94,7 +94,8 @@ export default class Game extends Phaser.Scene {
         this.sceneH = this.scale.height;
         this.hCenter = this.sceneH / 2;
 
-        const background = this.add.image(this.wCenter, this.hCenter, "kusamura");
+        const bg_name = Phaser.Utils.Array.GetRandom(['kusamura', 'machi', 'umi'])
+        const background = this.add.image(this.wCenter, this.hCenter, bg_name);
         const ground = this.add.rectangle(0, this.hCenter - 32, this.sceneW, this.hCenter);
         background.scale = 2;
         ground.setDisplayOrigin();
@@ -126,11 +127,11 @@ export default class Game extends Phaser.Scene {
     update() {}
 
     onBlur = () => {
-        console.log("onBlur");
+        // console.log("onBlur");
         this.save();
     };
     onFocus = () => {
-        console.log("onFocus");
+        // console.log("onFocus");
     };
     save() {
         localStorage.setItem("save_data", JSON.stringify(this.save_data));

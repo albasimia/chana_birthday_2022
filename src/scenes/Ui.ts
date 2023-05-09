@@ -35,22 +35,19 @@ export default class Ui extends Phaser.Scene {
         this.game = this.scene.get("GameScene");
 
         const button1 = new Button(this, 32, 300, {
-            // color: 0x999999,
-            color: 0xff0000,
+            color: 0xff0066,
             text: "ごはん",
             onClick: () => {
-                // console.log("gohan");
-                // this.foods_menu.getVisible();
                 this.foods_menu.setVisible(!this.foods_menu.visible);
             },
         });
-        const button2 = new Button(this, 96, 300, {
-            color: 0xffff00,
-            text: "うんどう",
-            onClick: () => {
-                console.log("undou");
-            },
-        });
+        // const button2 = new Button(this, 96, 300, {
+        //     color: 0xffff00,
+        //     text: "うんどう",
+        //     onClick: () => {
+        //         console.log("undou");
+        //     },
+        // });
         const button3 = new Button(this, 160, 300, {
             color: 0x0099ff,
             text: "トイレ",

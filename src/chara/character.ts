@@ -30,7 +30,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
         this.setInteractive();
         this.setOrigin(0.5, 0.5);
         this.on("pointerup", (p: Phaser.Input.Pointer) => {
-            console.log(this.name);
+            // console.log(this.name);
         });
 
         // const renderer = this.scene.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer;
@@ -43,6 +43,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
         return this;
     }
     move(x: number, y: number, callBack?: any) {
+        // たまごと墓は動かない。
         if (!chara_setting[this.name].move) {
             if (callBack) {
                 callBack();
