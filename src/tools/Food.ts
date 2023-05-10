@@ -19,6 +19,7 @@ export default class Food extends Phaser.GameObjects.Container {
 
         this.add([this.sprite]);
         this.scene.add.existing(this);
+        this.setDepth(2)
 
         const rdg = new Math.RandomDataGenerator();
         const target_x = rdg.between(20, 172);
@@ -42,8 +43,6 @@ export default class Food extends Phaser.GameObjects.Container {
         });
     }
     onColide = () => {
-        // console.log(this.food_data);
-
         this.food_data.effect.forEach((effect) => {
             const pram_val = eval(this.scene.save_data.data.player.parameter[effect.target] + effect.operation + effect.value)
             if(effect.operation == "+") {
@@ -57,6 +56,7 @@ export default class Food extends Phaser.GameObjects.Container {
                 }
             }
         });
+        this.scene.save_data.data.time.last_meal = Date.now();
         this.destroy();
     };
 }

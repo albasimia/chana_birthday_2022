@@ -18,10 +18,9 @@ const save_data_template = {
         time: {
             start: null,
             last_evolution: null,
-            meal: {
-                last: null,
-            },
+            last_meal: 1683727744267,
         },
+        unko: [],
     },
 };
 export default save_data_template;
