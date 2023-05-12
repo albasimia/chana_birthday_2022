@@ -27,6 +27,7 @@ export default class Toilet extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
 
         this.scene.physics.add.existing(this);
+        this.scene.physics.add.collider(this.scene.food_group, this, this.onColide);
         this.scene.physics.add.collider(this.scene.unko_group, this, this.onColide);
 
         this.clean();

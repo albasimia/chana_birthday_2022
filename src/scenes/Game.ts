@@ -23,6 +23,7 @@ export default class Game extends Phaser.Scene {
 
     save_data: Object;
 
+    food_group: [];
     unko_group: [];
 
     tm: TimeManage;
@@ -56,6 +57,7 @@ export default class Game extends Phaser.Scene {
         this.tm = new TimeManage(this);
         this.em = new EvolutionManage(this);
 
+        this.food_group = [];
         this.unko_group = [];
     }
 

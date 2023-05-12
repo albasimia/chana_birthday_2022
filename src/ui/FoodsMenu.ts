@@ -20,7 +20,8 @@ export default class FoodsMenu extends Menu {
         this.initMenu();
     }
     onClick(i:number) {
-        new Food(this.game, 60, 60, i);
+        this.game.food_group.push( new Food(this.game, 60, 60, i));
+        // new Food(this.game, 60, 60, i);
         // this.setVisible(false);
     }
 }
