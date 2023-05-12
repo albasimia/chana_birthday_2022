@@ -166,7 +166,7 @@ export default class Game extends Phaser.Scene {
             // 最後の食事から10分に1個追加 100個まで
             if (this.save_data.data.unko.length < Math.floor(since_last_meal / 10)) {
                 const addUnkoCount = Math.floor(since_last_meal / 10) - this.save_data.data.unko.length;
-                for (let index = 0; index < addUnkoCount; index++) {
+                for (let index = 0; index < addUnkoCount && this.save_data.data.unko.length < 100; index++) {
                     let x = Phaser.Math.Between(20, 172);
                     let y = Phaser.Math.Between(150, 250);
                     new Unko(this, x, y);
@@ -180,6 +180,7 @@ export default class Game extends Phaser.Scene {
                 }
             }
         }
+        // TIDO: うんこダメージ
     }
 
     // objectのmerge用、ここに書くべきじゃなさそう。
