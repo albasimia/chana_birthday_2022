@@ -20,7 +20,6 @@ export default class Sound extends Phaser.GameObjects.Container {
         this.add([this.sprite]);
         this.scene.add.existing(this);
 
-        this.scene.physics.add.existing(this);
         this.on("pointerup", (p: Phaser.Input.Pointer) => {
             this.onClick()
         });

@@ -7,6 +7,7 @@ import AwayTime from "phaser3-rex-plugins/plugins/awaytime.js";
 import TimeManage from "../tools/TimeManage";
 import EvolutionManage from "../tools/EvolutionManage";
 import Unko from "../tools/Unko";
+// import Toilet from "../tools/Toilet";
 
 export default class Game extends Phaser.Scene {
     isAnime: boolean;
@@ -21,6 +22,8 @@ export default class Game extends Phaser.Scene {
     hCenter: number;
 
     save_data: Object;
+
+    unko_group: [];
 
     tm: TimeManage;
     em: EvolutionManage;
@@ -52,6 +55,8 @@ export default class Game extends Phaser.Scene {
 
         this.tm = new TimeManage(this);
         this.em = new EvolutionManage(this);
+
+        this.unko_group = [];
     }
 
     preload() {
@@ -61,6 +66,7 @@ export default class Game extends Phaser.Scene {
         this.load.image("umi", "assets/img/bg/umi.png");
         // this.load.image("ground", "assets/img/ground.png");
         this.load.image("unko", "assets/img/stuff/unko.png");
+        this.load.image("ryusui", "assets/img/stuff/ryusui.png");
         for (const name in chara_setting) {
             if (Object.prototype.hasOwnProperty.call(chara_setting, name)) {
                 const element = chara_setting[name];
@@ -133,8 +139,11 @@ export default class Game extends Phaser.Scene {
         // うんこ初期表示
         const unko_data = this.save_data.data.unko.concat();
         for (const unko of unko_data) {
-            new Unko(this, unko.x, unko.y);
+            this.unko_group.push(new Unko(this, unko.x, unko.y));
+            // new Unko(this, unko.x, unko.y);
         }
+
+        // new Toilet(this, this.sceneW + 8, this.sceneH - 8 * 10)
     }
 
     update() {}
@@ -169,7 +178,9 @@ export default class Game extends Phaser.Scene {
                 for (let index = 0; index < addUnkoCount && this.save_data.data.unko.length < 100; index++) {
                     let x = Phaser.Math.Between(20, 172);
                     let y = Phaser.Math.Between(150, 250);
-                    new Unko(this, x, y);
+
+                    this.unko_group.push(new Unko(this, x, y));
+                    // new Unko(this, x, y);
 
                     const unko_data = {
                         time: Date.now(),

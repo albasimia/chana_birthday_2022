@@ -6,6 +6,7 @@ import Game from "../scenes/Game";
 import chara_setting from "../settings/chara_setting";
 import EvolutionManage from "../tools/EvolutionManage";
 import TimeManage from "../tools/TimeManage";
+import Toilet from "../tools/Toilet";
 
 export default class Ui extends Phaser.Scene {
     // button?: Button;
@@ -35,10 +36,9 @@ export default class Ui extends Phaser.Scene {
         this.load.image("sound_off", "assets/img/ui/sound_off.png");
     }
     create() {
-
-    //   this.events.on('changeMute', ()=>{
-    //     console.log('test')
-    // })
+        //   this.events.on('changeMute', ()=>{
+        //     console.log('test')
+        // })
         this.game = this.scene.get("GameScene");
 
         const button1 = new Button(this, 32, 300, {
@@ -59,7 +59,7 @@ export default class Ui extends Phaser.Scene {
             color: 0x0099ff,
             text: "トイレ",
             onClick: () => {
-                console.log("toire");
+                new Toilet(this.game, this.game.sceneW + 8, this.game.sceneH - 8 * 10);
             },
         });
 
@@ -75,8 +75,8 @@ export default class Ui extends Phaser.Scene {
                 } else {
                     let time_diff = 2880;
                     const evolCharaName = this.em.check(time_diff);
-                    if(evolCharaName != '') {
-                      this.game.player?.evolution(evolCharaName);
+                    if (evolCharaName != "") {
+                        this.game.player?.evolution(evolCharaName);
                     }
                 }
             },
@@ -90,9 +90,8 @@ export default class Ui extends Phaser.Scene {
         // });
 
         // this.menu = new Menu(this, 0, 0 , foods_data);
-        this.foods_menu = new FoodsMenu(this, this.game, 0, 0, 2);
-
         const soundBtn = new Sound(this, this.scale.width - 20, 20);
+        this.foods_menu = new FoodsMenu(this, this.game, 0, 0, 2);
 
         //  Our Text object to display the Score
         // var info = this.add.text(10, 10, "Score: 0", { font: "24px Arial", fill: "#000000" });
