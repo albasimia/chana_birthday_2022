@@ -163,10 +163,9 @@ export default class Game extends Phaser.Scene {
     checkUnko() {
         if (this.save_data.data.time.last_meal) {
             const since_last_meal = this.tm.getTimeDiff(this.save_data.data.time.last_meal, Date.now());
-            // 最後の食事から10分に1個追加
+            // 最後の食事から10分に1個追加 100個まで
             if (this.save_data.data.unko.length < Math.floor(since_last_meal / 10)) {
                 const addUnkoCount = Math.floor(since_last_meal / 10) - this.save_data.data.unko.length;
-                console.log("add unko " + addUnkoCount);
                 for (let index = 0; index < addUnkoCount; index++) {
                     let x = Phaser.Math.Between(20, 172);
                     let y = Phaser.Math.Between(150, 250);

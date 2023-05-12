@@ -9,10 +9,17 @@ export default class Unko extends Phaser.GameObjects.Container {
         this.scene = scene;
 
         this.sprite = scene.add.sprite(0, 0, "unko");
+        this.width = this.sprite.width;
+        this.height = this.sprite.height;
+        this.setDepth(1)
 
         this.add([this.sprite]);
         this.scene.add.existing(this);
 
-        this.setDepth(1)
+        this.scene.physics.add.existing(this);
+        // this.scene.physics.add.collider(this.scene.player, this, this.onColide);
+    }
+    onColide = ()=>{
+        // this.destroy();
     }
 }

@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Button from "../ui/Button";
 import FoodsMenu from "../ui/FoodsMenu";
+import Sound from "../ui/Sound";
 import Game from "../scenes/Game";
 import chara_setting from "../settings/chara_setting";
 import EvolutionManage from "../tools/EvolutionManage";
@@ -22,16 +23,22 @@ export default class Ui extends Phaser.Scene {
         this.tm = new TimeManage(game);
     }
     preload() {
-        this.load.spritesheet("btn", "assets/img/btn_gray2.png", {
+        this.load.spritesheet("btn", "assets/img/ui/btn_gray2.png", {
             frameWidth: 30,
             frameHeight: 18,
         });
-        this.load.spritesheet("btn_frame", "assets/img/btn_gray_frame.png", {
+        this.load.spritesheet("btn_frame", "assets/img/ui/btn_gray_frame.png", {
             frameWidth: 30,
             frameHeight: 18,
         });
+        this.load.image("sound_on", "assets/img/ui/sound_on.png");
+        this.load.image("sound_off", "assets/img/ui/sound_off.png");
     }
     create() {
+
+    //   this.events.on('changeMute', ()=>{
+    //     console.log('test')
+    // })
         this.game = this.scene.get("GameScene");
 
         const button1 = new Button(this, 32, 300, {
@@ -84,6 +91,8 @@ export default class Ui extends Phaser.Scene {
 
         // this.menu = new Menu(this, 0, 0 , foods_data);
         this.foods_menu = new FoodsMenu(this, this.game, 0, 0, 2);
+
+        const soundBtn = new Sound(this, this.scale.width - 20, 20);
 
         //  Our Text object to display the Score
         // var info = this.add.text(10, 10, "Score: 0", { font: "24px Arial", fill: "#000000" });
