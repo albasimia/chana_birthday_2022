@@ -6,6 +6,7 @@ import save_data_template from "../settings/save_data_template";
 import AwayTime from "phaser3-rex-plugins/plugins/awaytime.js";
 import TimeManage from "../tools/TimeManage";
 import EvolutionManage from "../tools/EvolutionManage";
+import Food from "../tools/Food";
 import Unko from "../tools/Unko";
 // import Toilet from "../tools/Toilet";
 
@@ -23,7 +24,7 @@ export default class Game extends Phaser.Scene {
 
     save_data: Object;
 
-    food_group: [];
+    meal_group: [];
     unko_group: [];
 
     tm: TimeManage;
@@ -57,7 +58,7 @@ export default class Game extends Phaser.Scene {
         this.tm = new TimeManage(this);
         this.em = new EvolutionManage(this);
 
-        this.food_group = [];
+        this.meal_group = [];
         this.unko_group = [];
     }
 
@@ -138,14 +139,16 @@ export default class Game extends Phaser.Scene {
         this.game.events.addListener(Phaser.Core.Events.BLUR, this.onBlur);
         this.game.events.addListener(Phaser.Core.Events.FOCUS, this.onFocus);
 
+        // ごはん初期表示
+        const meal_data = this.save_data.data.meal.concat();
+        for (const meal of meal_data) {
+            this.meal_group.push(new Food(this, meal.x, meal.y, meal.index, false));
+        }
         // うんこ初期表示
         const unko_data = this.save_data.data.unko.concat();
         for (const unko of unko_data) {
             this.unko_group.push(new Unko(this, unko.x, unko.y));
-            // new Unko(this, unko.x, unko.y);
         }
-
-        // new Toilet(this, this.sceneW + 8, this.sceneH - 8 * 10)
     }
 
     update() {}
