@@ -18,7 +18,8 @@ const save_data_template = {
         time: {
             start: null,
             last_evolution: null,
-            last_meal: 1683727744267,
+            last_meal: null,
+            // last_meal: 1683727744267,
         },
         unko: [],
     },

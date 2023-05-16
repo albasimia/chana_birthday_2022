@@ -38,11 +38,12 @@ export default class Food extends Phaser.GameObjects.Container {
             callbackScope: this,
             onComplete: () => {
                 this.scene.physics.add.existing(this);
-                this.scene.physics.add.collider(this.scene.player, this, this.onColide);
+                this.scene.physics.add.collider(this.scene.player.sprite, this, this.onColide);
             },
         });
     }
-    onColide = () => {
+    onColide = (obj1, obj2) => {
+        // console.log(obj1)
         this.food_data.effect.forEach((effect) => {
             const pram_val = eval(this.scene.save_data.data.player.parameter[effect.target] + effect.operation + effect.value)
             if(effect.operation == "+") {

@@ -7,8 +7,8 @@ const chara_setting = {
         frameStart: 0,
         frameEnd: 0,
         bodySize: {
-            w: 20,
-            h: 20,
+          w: 40,
+          h: 60,
         },
         move:false,
     },

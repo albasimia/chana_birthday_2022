@@ -67,6 +67,11 @@ export default class Ui extends Phaser.Scene {
             text: "しんか",
             onClick: () => {
                 console.log("shinka");
+
+                // this.game.player?.evolution('tamago');
+                // return;
+
+
                 if (this.game.charaName == "haka") {
                     this.game.save_data.data.player.stage = 0;
                     this.game.save_data.data.player.chara = "tamago";

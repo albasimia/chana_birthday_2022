@@ -119,7 +119,7 @@ export default class Game extends Phaser.Scene {
         ground.setDisplayOrigin();
 
         this.player = new Character(this, this.wCenter, this.sceneH - 100, this.charaName);
-        this.player.setCollideWorldBounds(true);
+        // this.player.setCollideWorldBounds(true);
         this.player.setDepth(99);
 
         // this.player.setBounce(0.5);
