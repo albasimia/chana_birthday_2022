@@ -73,28 +73,28 @@ export default class Ui extends Phaser.Scene {
 
         this.alive_buttons = new GameObjects.Group(this, [this.gohan_btn, this.toilet_btn]);
 
-        const button4 = new Button(this, 32, 20, {
-            text: "しんか",
-            onClick: () => {
-                console.log("shinka");
+        // const button4 = new Button(this, 32, 20, {
+        //     text: "しんか",
+        //     onClick: () => {
+        //         console.log("shinka");
 
-                // this.game.player?.evolution('tamago');
-                // return;
+        //         // this.game.player?.evolution('tamago');
+        //         // return;
 
-                if (this.game.charaName == "haka") {
-                    this.game.save_data.data.player.stage = 0;
-                    this.game.save_data.data.player.chara = "tamago";
-                    this.game.save_data.data.time.start = Date.now();
-                    this.game.player?.changeChara("tamago");
-                } else {
-                    let time_diff = 2880;
-                    const evolCharaName = this.em.check(time_diff);
-                    if (evolCharaName != "") {
-                        this.game.player?.evolution(evolCharaName);
-                    }
-                }
-            },
-        });
+        //         if (this.game.charaName == "haka") {
+        //             this.game.save_data.data.player.stage = 0;
+        //             this.game.save_data.data.player.chara = "tamago";
+        //             this.game.save_data.data.time.start = Date.now();
+        //             this.game.player?.changeChara("tamago");
+        //         } else {
+        //             let time_diff = 2880;
+        //             const evolCharaName = this.em.check(time_diff);
+        //             if (evolCharaName != "") {
+        //                 this.game.player?.evolution(evolCharaName);
+        //             }
+        //         }
+        //     },
+        // });
 
         this.reset_btn = new Button(this, 96, 300, {
           text: "リセット",
