@@ -4,7 +4,7 @@ const save_data_template = {
         player: {
             chara: "tamago",
             stage: 0,
-            status: "nomal", // [healthy, nomal, hunger, sickness]
+            status: "hutsuu", // [genki, hutsuu, haraheri, dokuro]
             parameter: {
                 health: 25,
                 intelligence: 0,

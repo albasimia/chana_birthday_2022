@@ -21,6 +21,6 @@ const ui:UIScene = new UIScene(game);
 const sounds:Sounds = new Sounds(game,ui);
 new Phaser.Game(
   Object.assign(config, {
-    scene: [game, ui, sounds],
+    scene: [game, sounds, ui],
   })
 );

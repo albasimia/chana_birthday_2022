@@ -6,14 +6,13 @@ export default class EvolutionManage {
     player_data: Object;
     constructor(scene: Game) {
         this.scene = scene;
-        this.player_data = scene.save_data.data.player;
     }
     check(time: number): string {
         let evolCharaName = '';
         const max_key = this.getMaxParamKey();
         // ステージ1
         if (time >= 0) {
-            if (this.player_data.stage == 0) {
+            if (this.scene.save_data.data.player.stage == 0) {
                 evolCharaName = "chana";
             }
         }
@@ -21,7 +20,7 @@ export default class EvolutionManage {
         // ステージ2　1時間
         // if (time >= 1) {
         if (time >= 60) {
-            if (this.player_data.stage == 1) {
+            if (this.scene.save_data.data.player.stage == 1) {
                 evolCharaName = "masara";
             }
         }
@@ -29,7 +28,7 @@ export default class EvolutionManage {
         // ステージ3　14時間
         // if (time >= 2) {
         if (time >= 840) {
-            if (this.player_data.stage == 2) {
+            if (this.scene.save_data.data.player.stage == 2) {
                 if (["music", "gag"].indexOf(max_key) >= 0) {
                     evolCharaName = "rancia";
                 }
@@ -41,31 +40,31 @@ export default class EvolutionManage {
 
         // ステージ4　24時間
         if (time >= 1440) {
-            if (this.player_data.stage == 3) {
+            if (this.scene.save_data.data.player.stage == 3) {
                 // 優先度1
-                if (this.player_data.parameter[max_key] <= 25) {
+                if (this.scene.save_data.data.player.parameter[max_key] <= 25) {
                     evolCharaName = "taki";
                     return evolCharaName;
                 }
 
                 // 優先度2
-                if (this.player_data.parameter.kusuri >= 100) {
+                if (this.scene.save_data.data.player.parameter.kusuri >= 100) {
                     evolCharaName = "konataro";
                     return evolCharaName;
                 }
-                if (this.player_data.parameter.cola >= 100) {
+                if (this.scene.save_data.data.player.parameter.cola >= 100) {
                     evolCharaName = "watari";
                     return evolCharaName;
                 }
 
                 // 優先度3
-                if (this.player_data.parameter.music >= 30 || this.player_data.parameter.health <= 10) {
+                if (this.scene.save_data.data.player.parameter.music >= 30 || this.scene.save_data.data.player.parameter.health <= 10) {
                     evolCharaName = "makoto";
                     return evolCharaName;
                 }
 
                 // 優先度4
-                if (this.player_data.chara == "rancia") {
+                if (this.scene.save_data.data.player.chara == "rancia") {
                     if (max_key == "intelligence") {
                         evolCharaName = "tanikou";
                         return evolCharaName;
@@ -84,7 +83,7 @@ export default class EvolutionManage {
                     }
                 }
                 
-                if (this.player_data.chara == "makiko") {
+                if (this.scene.save_data.data.player.chara == "makiko") {
                     if (max_key == "intelligence") {
                         evolCharaName = "taguchi";
                         return evolCharaName;
@@ -107,7 +106,7 @@ export default class EvolutionManage {
 
         // ステージ5　48時間
         if (time >= 2880) {
-            if (this.player_data.stage == 4) {
+            if (this.scene.save_data.data.player.stage == 4) {
                 evolCharaName = "haka";
             }
         }
@@ -115,9 +114,9 @@ export default class EvolutionManage {
     }
     getMaxParamKey(): string {
         let max_key = "";
-        for (const key in this.player_data.parameter) {
+        for (const key in this.scene.save_data.data.player.parameter) {
             if (["intelligence", "music", "eros", "gag"].indexOf(key) >= 0) {
-                if (max_key == "" || this.player_data.parameter[max_key] < this.player_data.parameter[key]) {
+                if (max_key == "" || this.scene.save_data.data.player.parameter[max_key] < this.scene.save_data.data.player.parameter[key]) {
                     max_key = key;
                 }
             }

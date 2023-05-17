@@ -2,8 +2,8 @@ import Phaser, { Time } from "phaser";
 import Character from "../chara/Character";
 import chara_setting from "../settings/chara_setting";
 import foods_setting from "../settings/foods_setting";
+import status_setting from "../settings/status_setting";
 import save_data_template from "../settings/save_data_template";
-import AwayTime from "phaser3-rex-plugins/plugins/awaytime.js";
 import TimeManage from "../tools/TimeManage";
 import EvolutionManage from "../tools/EvolutionManage";
 import Unko from "../tools/Unko";
@@ -41,9 +41,7 @@ export default class Game extends Phaser.Scene {
             this.save_data = save_data_template;
         } else {
             if (this.save_data.format_virsion != save_data_template.format_virsion) {
-                console.log(save_data_template);
                 this.save_data = this.merge(save_data_template, this.save_data);
-                console.log(save_data_template);
                 this.save_data.format_virsion = save_data_template.format_virsion;
                 this.save();
             }
@@ -84,6 +82,14 @@ export default class Game extends Phaser.Scene {
                 for (let i = 0; i < food_element.images.length; i++) {
                     this.load.image(food_element.images[i].image_name, food_element.images[i].path);
                 }
+            }
+        }
+        for (const state in status_setting) {
+            if (Object.prototype.hasOwnProperty.call(status_setting, state)) {
+                const state_element = status_setting[state];
+                // for (let i = 0; i < state_element.images.length; i++) {
+                this.load.image(state_element.image.name, state_element.image.image_path);
+                // }
             }
         }
     }
@@ -164,9 +170,13 @@ export default class Game extends Phaser.Scene {
         // うんこ確認
         this.checkUnko();
 
+        // ステータス確認
+        this.checkStatus();
+
         // 進化確認
         const since_start = this.tm.getTimeDiff(this.save_data.data.time.start, Date.now());
         const evolCharaName = this.em.check(since_start);
+        console.log(this.save_data);
         if (evolCharaName != "") {
             this.player?.evolution(evolCharaName);
         }
@@ -177,7 +187,7 @@ export default class Game extends Phaser.Scene {
             // 最後の食事から10分に1個追加 100個まで
             if (this.save_data.data.unko.length < Math.floor(since_last_meal / 10)) {
                 const addUnkoCount = Math.floor(since_last_meal / 10) - this.save_data.data.unko.length;
-                for (let index = 0; index < addUnkoCount && this.save_data.data.unko.length < 100; index++) {
+                for (let index = 0; index < addUnkoCount && since_last_meal <= 1000; index++) {
                     let x = Phaser.Math.Between(20, 172);
                     let y = Phaser.Math.Between(150, 250);
 
@@ -194,6 +204,18 @@ export default class Game extends Phaser.Scene {
             }
         }
         // TIDO: うんこダメージ
+    }
+    checkStatus() {
+        if (this.save_data.data.player.parameter.health <= 10) {
+            this.player?.changeStatus("dokuro");
+            return;
+        }
+        const since_last_meal = this.tm.getTimeDiff(this.save_data.data.time.last_meal, Date.now());
+        if (since_last_meal >= 60) {
+            this.player?.changeStatus("haraheri");
+            return;
+        }
+        this.player?.changeStatus("hutsuu");
     }
 
     // objectのmerge用、ここに書くべきじゃなさそう。

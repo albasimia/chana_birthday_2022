@@ -33,7 +33,6 @@ export default class Toilet extends Phaser.GameObjects.Container {
         this.clean();
     }
     clean() {
-        this.scene.save_data.data.time.last_meal = null;
         this.scene.save_data.data.unko = [];
         this.scene.save();
         const target = { x: -8, y: this.y };

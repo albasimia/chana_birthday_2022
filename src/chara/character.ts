@@ -11,6 +11,8 @@ export default class Character extends Phaser.GameObjects.Container {
     idle_anime?: false | Phaser.Animations.Animation;
     // private customPipeline!: Phaser.Renderer.WebGL.WebGLPipeline;
     // private time = 0;
+    sprite: Phaser.GameObjects.Sprite;
+    state_sprite: Phaser.GameObjects.Sprite;
     constructor(scene: Phaser.Scene, x: number, y: number, name: string) {
         super(scene, x, y);
 
@@ -23,21 +25,23 @@ export default class Character extends Phaser.GameObjects.Container {
 
         // this.setScale(setting[name].scale);
         this.sprite = this.scene.add.sprite(0, 0, this.name);
-        this.test = this.scene.add.sprite(this.sprite.width, 0, 'unko');
 
-        
-        this.add([this.sprite, this.test]);
+        this.state_sprite = this.scene.add.sprite(0, 0, "haraheri");
+        this.state_sprite.setScale(2);
+        this.state_sprite.setVisible(false);
 
-        this.scene.add.existing(this);
+        // this.state_sprite.setTexture('dokuro')
+
+        this.add([this.sprite, this.state_sprite]);
+
         this.scene.physics.add.existing(this.sprite);
-
+        this.scene.add.existing(this);
 
         this.changeChara(name);
 
         this.setAnime(name, chara_setting[name].frameStart, chara_setting[name].frameEnd);
         // this.sprite.setDisplayOrigin(0.5);
-        
-        
+
         // this.sprite.setInteractive();
         // this.sprite.body.setInteractive();
         this.sprite.on("pointerup", (p: Phaser.Input.Pointer) => {
@@ -59,17 +63,17 @@ export default class Character extends Phaser.GameObjects.Container {
         }
         this.isMove = true;
         let isFlip = false;
-        // const target = { 
+        // const target = {
         //   x: x - chara_setting[this.name].frameW / 2,
         //   y: y - chara_setting[this.name].frameH / 2
         // };
-        // const target = { 
+        // const target = {
         //   x: x - chara_setting[this.name].frameW,
         //   y: y - chara_setting[this.name].frameH
         // };
-        const target = { 
-          x: x,
-          y: y
+        const target = {
+            x: x,
+            y: y,
         };
 
         if (this.x < target.x) {
@@ -102,8 +106,10 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sprite.setTexture(name);
         this.sprite.setScale(chara_setting[name].scale);
         this.sprite.body.setSize(chara_setting[name].bodySize.w, chara_setting[name].bodySize.h);
-        
+
         this.setAnime(name, chara_setting[name].frameStart, chara_setting[name].frameEnd);
+
+        this.state_sprite.setPosition(chara_setting[name].bodySize.w * chara_setting[name].scale, -chara_setting[name].bodySize.h);
     }
     evolution(evolCharaName: string) {
         if (!this.isEvolution) {
@@ -111,6 +117,10 @@ export default class Character extends Phaser.GameObjects.Container {
             this.scene.save_data.data.player.stage++;
             this.scene.save_data.data.player.chara = evolCharaName;
             this.scene.save();
+
+            // その他のUI非表示
+            this.state_sprite.setVisible(false);
+
             this.sprite.anims.pause();
             // this.move(96, 160, async () => {
             this.move(this.scene.wCenter, this.scene.sceneH - 100, async () => {
@@ -168,6 +178,25 @@ export default class Character extends Phaser.GameObjects.Container {
                     },
                 });
             });
+        }
+    }
+    changeStatus(state: string) {
+        if (["tamago", "haka"].indexOf(this.name) != -1) {
+            this.state_sprite.setTexture("hutsuu");
+            this.state_sprite.setVisible(false);
+            this.scene.save_data.data.player.status = state;
+            this.scene.save();
+            return;
+        }
+        this.scene.save_data.data.player.status = state;
+        this.scene.save();
+        if (state == "hutsuu") {
+            this.state_sprite.setVisible(false);
+        } else {
+            this.state_sprite.setTexture(state);
+            if(this.isEvolution == false) {
+                this.state_sprite.setVisible(true);
+            }
         }
     }
     setAnime(chara: string = this.name, start: number = 0, end: number = 3) {
