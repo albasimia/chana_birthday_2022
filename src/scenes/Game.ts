@@ -176,7 +176,6 @@ export default class Game extends Phaser.Scene {
         // 進化確認
         const since_start = this.tm.getTimeDiff(this.save_data.data.time.start, Date.now());
         const evolCharaName = this.em.check(since_start);
-        console.log(this.save_data);
         if (evolCharaName != "") {
             this.player?.evolution(evolCharaName);
         }
