@@ -34,6 +34,7 @@ export default class Toilet extends Phaser.GameObjects.Container {
     }
     clean() {
         this.scene.save_data.data.unko = [];
+        this.scene.save_data.data.time.last_clean = Date.now();
         this.scene.save();
         const target = { x: -8, y: this.y };
         this.toiletTween = this.scene.tweens.add({

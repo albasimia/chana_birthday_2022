@@ -182,11 +182,19 @@ export default class Game extends Phaser.Scene {
     };
     checkUnko() {
         if (this.save_data.data.time.last_meal) {
-            const since_last_meal = this.tm.getTimeDiff(this.save_data.data.time.last_meal, Date.now());
+            const unkoAddTime = 15;
+            let maxUnkoCount = 100;
+            const target_time = this.save_data.data.time.last_clean ? "last_clean" : "last_meal";
+            // const since_last_meal = this.tm.getTimeDiff(this.save_data.data.time.last_meal, Date.now());
+            const since_target_time = this.tm.getTimeDiff(this.save_data.data.time[target_time], Date.now());
             // 最後の食事から10分に1個追加 100個まで
-            if (this.save_data.data.unko.length < Math.floor(since_last_meal / 10)) {
-                const addUnkoCount = Math.floor(since_last_meal / 10) - this.save_data.data.unko.length;
-                for (let index = 0; index < addUnkoCount && since_last_meal <= 1000; index++) {
+            if (this.save_data.data.unko.length < Math.floor(since_target_time / unkoAddTime)) {
+                const addUnkoCount = Math.floor(since_target_time / unkoAddTime) - this.save_data.data.unko.length;
+                const diffUnkoCount = Math.floor(this.tm.getTimeDiff(this.save_data.data.time.last_clean, this.save_data.data.time.last_meal) / 10);
+                if (diffUnkoCount < maxUnkoCount) {
+                    maxUnkoCount = maxUnkoCount - diffUnkoCount;
+                }
+                for (let index = 0; index < addUnkoCount && this.save_data.data.unko.length < maxUnkoCount; index++) {
                     let x = Phaser.Math.Between(20, 172);
                     let y = Phaser.Math.Between(150, 250);
 

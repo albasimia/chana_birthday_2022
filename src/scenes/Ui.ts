@@ -38,13 +38,9 @@ export default class Ui extends Phaser.Scene {
             frameWidth: 30,
             frameHeight: 18,
         });
-        this.load.image("sound_on", "assets/img/ui/sound_on.png");
-        this.load.image("sound_off", "assets/img/ui/sound_off.png");
     }
     create() {
-        //   this.events.on('changeMute', ()=>{
-        //     console.log('test')
-        // })
+        
         this.game = this.scene.get("GameScene");
 
         this.gohan_btn = new Button(this, 32, 300, {
@@ -73,6 +69,7 @@ export default class Ui extends Phaser.Scene {
 
         this.alive_buttons = new GameObjects.Group(this, [this.gohan_btn, this.toilet_btn]);
 
+        // デバッグ用
         // const button4 = new Button(this, 32, 20, {
         //     text: "しんか",
         //     onClick: () => {
