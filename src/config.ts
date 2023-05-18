@@ -41,7 +41,10 @@ export default {
     render: {
         pixelArt: true,
     },
-    pipeline: { CustomPipeline: CustomPipeline },
+    audio: {
+        disableWebAudio: true
+    },
+    // pipeline: { CustomPipeline: CustomPipeline },
     // dom: {
     //   createContainer: true,
     // },
