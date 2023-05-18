@@ -24,22 +24,21 @@ export default class Sounds extends Phaser.Scene {
     create() {
         this.SoundButton = new SoundButton(this, this.scale.width - 20, 20);
 
+        this.bgm = this.sound.add("bgm");
         this.events.on("changeMute", () => {
             if(this.sound.locked) {
-                console.log('unlock')
                 this.sound.unlock();
             }
             this.isMute = !this.isMute;
             this.bgm.setMute(this.isMute);
         });
-        this.bgm = this.sound.add("bgm");
         this.bgm.setMute(this.isMute);
 
         if (!this.sound.locked) {
-            this.bgm.play({ loop: true, volume: 0.2 });
+            this.bgm.play({ loop: true, volume: 0.1 });
         } else {
             this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
-                this.bgm.play({ loop: true, volume: 0.2 });
+                this.bgm.play({ loop: true, volume: 0.1 });
             });
         }
     }
