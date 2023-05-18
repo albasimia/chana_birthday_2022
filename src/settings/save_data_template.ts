@@ -1,5 +1,5 @@
 const save_data_template = {
-    format_virsion: "0.0.1",
+    format_virsion: "0.0.2",
     data: {
         player: {
             chara: "tamago",
@@ -20,6 +20,7 @@ const save_data_template = {
             last_evolution: null,
             last_meal: null,
             // last_meal: 1683727744267,
+            last_clean: null,
         },
         unko: [],
     },
